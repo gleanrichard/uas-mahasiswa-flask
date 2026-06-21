@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Data Mahasiswa</title>
+
+    <style>
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family:Segoe UI;
+        }
+
+        body{
+            background:#f4f6f9;
+        }
+
+        .navbar{
+            background:#1e3c72;
+            color:white;
+            padding:20px;
+            font-size:22px;
+            font-weight:bold;
+        }
+
+        .container{
+            padding:30px;
+        }
+
+        .box{
+            background:white;
+            padding:25px;
+            border-radius:15px;
+            box-shadow:0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        h2{
+            margin-bottom:20px;
+        }
+
+        table{
+            width:100%;
+            border-collapse:collapse;
+        }
+
+        th{
+            background:#1e3c72;
+            color:white;
+            padding:12px;
+        }
+
+        td{
+            padding:12px;
+            border-bottom:1px solid #ddd;
+        }
+
+        .back{
+            text-decoration:none;
+            display:inline-block;
+            margin-bottom:20px;
+            color:#1e3c72;
+            font-weight:bold;
+        }
+
+        .export-btn{
+            display:inline-block;
+            margin-bottom:20px;
+            padding:12px 20px;
+            background:green;
+            color:white;
+            text-decoration:none;
+            border-radius:8px;
+        }
+
+        .export-btn:hover{
+            opacity:0.9;
+        }
+
+        .action-btn{
+            text-decoration:none;
+            padding:8px 14px;
+            border-radius:6px;
+            color:white;
+            font-size:14px;
+            margin-right:5px;
+            display:inline-block;
+        }
+
+        .edit-btn{
+            background:#2a5298;
+        }
+
+        .delete-btn{
+            background:red;
+        }
+
+        .json-btn{
+            display:inline-block;
+            margin-bottom:20px;
+            padding:12px 20px;
+            background:#f39c12;
+            color:white;
+            text-decoration:none;
+            border-radius:8px;
+            margin-left:10px;
+        }
+
+        .pdf-btn{
+            display:inline-block;
+            margin-bottom:20px;
+            padding:12px 20px;
+            background:red;
+            color:white;
+            text-decoration:none;
+            border-radius:8px;
+            margin-left:10px;
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="navbar">
+    🎓 Data Mahasiswa
+</div>
+
+<div class="container">
+
+    <a href="/dashboard" class="back">
+        ← Kembali ke Dashboard
+    </a>
+
+    <div class="box">
+        <h2>Data Mahasiswa</h2>
+
+        <a href="/export_csv" class="export-btn">
+            Export CSV
+        </a>
+
+        <a href="/export_json" class="json-btn">
+            Export JSON
+        </a>
+
+        <a href="/export_pdf" class="pdf-btn">
+            Export PDF
+        </a>
+
+        <table>
+            <tr>
+                <th>NIM</th>
+                <th>Nama</th>
+                <th>Jurusan</th>
+                <th>IPK</th>
+                <th>Aksi</th>
+            </tr>
+
+            {% if data %}
+                {% for m in data %}
+                <tr>
+                    <td>{{ m.nim }}</td>
+                    <td>{{ m.nama }}</td>
+                    <td>{{ m.jurusan }}</td>
+                    <td>{{ m.ipk }}</td>
+
+                    <td>
+                        <a href="/edit_mahasiswa/{{ m.nim }}" class="action-btn edit-btn">
+                            Edit
+                        </a>
+
+                        <a href="/hapus_mahasiswa/{{ m.nim }}"
+                           class="action-btn delete-btn"
+                           onclick="return confirm('Yakin mau hapus data ini?')">
+                            Hapus
+                        </a>
+                   </td>
+               </tr>
+               {% endfor %}
+           {% else %}
+               <tr>
+                   <td colspan="5" style="text-align:center; padding:20px;">
+                       Belum ada data mahasiswa
+                  </td>
+               </tr>
+           {% endif %}
+        </table>
+    </div>
+
+</div>
+
+</body>
+</html>

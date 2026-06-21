@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dashboard Admin</title>
+
+    <style>
+
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family:Segoe UI;
+        }
+
+        body{
+            background:#f4f6f9;
+        }
+
+        .navbar{
+            background:#1e3c72;
+            color:white;
+            padding:20px;
+            font-size:22px;
+            font-weight:bold;
+        }
+
+        .container{
+            padding:30px;
+        }
+
+        .welcome{
+            background:white;
+            padding:25px;
+            border-radius:15px;
+            box-shadow:0 5px 15px rgba(0,0,0,0.1);
+            margin-bottom:25px;
+        }
+
+        .cards{
+            display:flex;
+            gap:20px;
+            margin-bottom:25px;
+        }
+
+        .card{
+            flex:1;
+            background:white;
+            padding:25px;
+            border-radius:15px;
+            box-shadow:0 5px 15px rgba(0,0,0,0.1);
+            text-align:center;
+        }
+
+        .card h3{
+            color:#666;
+            margin-bottom:10px;
+        }
+
+        .card h1{
+            color:#1e3c72;
+        }
+
+        .menu{
+            background:white;
+            padding:25px;
+            border-radius:15px;
+            box-shadow:0 5px 15px rgba(0,0,0,0.1);
+            margin-bottom:25px;
+        }
+
+        .menu h2{
+            margin-bottom:20px;
+        }
+
+        .menu-buttons{
+            display:flex;
+            flex-wrap:wrap;
+            gap:12px;
+        }
+
+        .btn{
+            display:inline-block;
+            padding:12px 20px;
+            background:#2a5298;
+            color:white;
+            text-decoration:none;
+            border-radius:8px;
+        }
+
+        .btn:hover{
+            background:#1e3c72;
+        }
+
+        .logout{
+            background:red;
+        }
+
+    </style>
+
+</head>
+<body>
+
+    <div class="navbar">
+        🎓 Sistem Manajemen Mahasiswa
+    </div>
+
+    <div class="container">
+
+        <div class="welcome">
+            <h2>Selamat Datang</h2>
+            <p>{{ email }}</p>
+
+            <p style="margin-top:10px; color:#666;">
+            Kelola seluruh data mahasiswa melalui dashboard admin.
+            </p>
+
+            {% with messages = get_flashed_messages() %}
+              {% if messages %}
+                <p style="color:green;">
+                  {% for msg in messages %}
+                    {{ msg }}
+                  {% endfor %}
+                </p>
+              {% endif %}
+            {% endwith %}
+        </div>
+
+        <div class="cards">
+
+            <div class="card">
+                <h3>Total Mahasiswa</h3>
+                <h1>{{ total }}</h1>
+            </div>
+
+            <div class="card">
+                <h3>IPK Tertinggi</h3>
+                <h1>{{ ipk_max }}</h1>
+            </div>
+
+            <div class="card">
+                <h3>Rata-rata IPK</h3>
+                <h1>{{ "%.2f"|format(ipk_avg) }}</h1>
+            </div>
+
+            <div class="card">
+                <h3>Total Jurusan</h3>
+                <h1>{{ total_jurusan }}</h1>
+            </div>
+
+            <div class="card">
+                <h3>IPK > 3.5</h3>
+                <h1>{{ ipk_tinggi }}</h1>
+            </div>
+
+            <div class="card">
+                <h3>IPK < 2.5</h3>
+                <h1>{{ ipk_rendah }}</h1>
+            </div>
+
+        </div>
+
+        <div class="menu">
+            <h2>Menu Utama</h2>
+
+            <div class="menu-buttons">
+                <a href="/data_mahasiswa" class="btn">Data Mahasiswa</a>
+                <a href="/tambah" class="btn">Tambah Mahasiswa</a>
+                <a href="/cari" class="btn">Cari Data</a>
+                <a href="/sorting" class="btn">Sorting Data</a>
+                <a href="/logout" class="btn logout">Logout</a>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

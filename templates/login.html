@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login Admin</title>
+
+    <style>
+
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family:Segoe UI;
+        }
+
+        body{
+            background:linear-gradient(135deg,#1e3c72,#2a5298);
+            height:100vh;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+        }
+
+        .card{
+            width:400px;
+            background:white;
+            padding:40px;
+            border-radius:15px;
+            box-shadow:0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        h2{
+            text-align:center;
+            margin-bottom:25px;
+            color:#333;
+        }
+
+        input{
+            width:100%;
+            padding:12px;
+            margin-bottom:15px;
+            border:1px solid #ccc;
+            border-radius:8px;
+        }
+
+        button{
+            width:100%;
+            padding:12px;
+            background:#2a5298;
+            color:white;
+            border:none;
+            border-radius:8px;
+            cursor:pointer;
+            font-size:16px;
+        }
+
+        button:hover{
+            background:#1e3c72;
+        }
+
+        .logo{
+            text-align:center;
+            font-size:50px;
+            margin-bottom:10px;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <div class="card">
+
+        <div class="logo">
+            🎓
+        </div>
+
+        <h2>Login Sistem Akademik</h2>
+
+        {% with messages = get_flashed_messages() %}
+          {% if messages %}
+            <p style="color:red;">
+              {% for msg in messages %}
+                {{ msg }}
+              {% endfor %}
+            </p>
+          {% endif %}
+        {% endwith %}
+
+        <form action="/proses_login" method="POST">
+
+            <input
+                type="email"
+                name="email"
+                placeholder="Masukkan Email"
+                required
+            >
+
+            <input
+                type="password"
+                name="password"
+                placeholder="Masukkan Password"
+                required
+            >
+
+            <button type="submit">
+                Login
+            </button>
+
+        </form>
+
+    </div>
+
+</body>
+</html>

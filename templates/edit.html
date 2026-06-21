@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Edit Mahasiswa</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family:Segoe UI;
+        }
+
+        body{
+            background:#f4f6f9;
+        }
+
+        .navbar{
+            background:#1e3c72;
+            color:white;
+            padding:20px;
+            font-size:22px;
+            font-weight:bold;
+        }
+
+        .container{
+            padding:30px;
+        }
+
+        .box{
+            background:white;
+            padding:30px;
+            border-radius:15px;
+            box-shadow:0 8px 20px rgba(0,0,0,0.08);
+            max-width:700px;
+            margin:auto;
+        }
+
+        h2{
+            color:#1e3c72;
+            margin-bottom:20px;
+        }
+
+        p{
+            margin-bottom:8px;
+            margin-top:15px;
+            font-weight:bold;
+        }
+
+        input{
+            width:100%;
+            padding:12px;
+            border:1px solid #ccc;
+            border-radius:8px;
+        }
+
+        button{
+            padding:12px 20px;
+            background:#2a5298;
+            color:white;
+            border:none;
+            border-radius:8px;
+            cursor:pointer;
+        }
+
+        button:hover{
+            background:#1e3c72;
+        }
+
+        .cancel-btn{
+            text-decoration:none;
+            color:#666;
+            font-weight:bold;
+        }
+
+        .cancel-btn:hover{
+            color:#1e3c72;
+        }
+
+        .error{
+            color:red;
+            margin-bottom:15px;
+        }
+
+        .action-group{
+            margin-top:25px;
+            display:flex;
+            align-items:center;
+            gap:15px;
+       }
+    </style>
+</head>
+<body>
+
+<div class="navbar">
+    ✏ Edit Data Mahasiswa
+</div>
+
+<div class="container">
+<div class="box">
+
+<h2>Edit Data Mahasiswa</h2>
+
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    {% for msg in messages %}
+      <p class="error">{{ msg }}</p>
+    {% endfor %}
+  {% endif %}
+{% endwith %}
+
+<form action="/update_mahasiswa" method="POST">
+
+    <input type="hidden"
+           name="nim_lama"
+           value="{{ m.nim }}">
+
+    <p>NIM</p>
+    <input type="text"
+           name="nim"
+           value="{{ m.nim }}">
+
+    <p>Nama</p>
+    <input type="text"
+           name="nama"
+           value="{{ m.nama }}">
+
+    <p>Jurusan</p>
+    <input type="text"
+           name="jurusan"
+           value="{{ m.jurusan }}">
+
+    <p>IPK</p>
+    <input type="text"
+           name="ipk"
+           value="{{ m.ipk }}">
+
+    <div class="action-group">
+        <button type="submit">Update</button>
+
+        <a href="/data_mahasiswa" class="cancel-btn">
+            Batal
+       </a>
+   </div>
+
+</form>
+
+</div>
+</div>
+
+</body>
+</html>

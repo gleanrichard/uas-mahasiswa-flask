@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Tambah Mahasiswa</title>
+
+    <style>
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family:Segoe UI;
+        }
+
+        body{
+            background:#f4f6f9;
+        }
+
+        .navbar{
+            background:#1e3c72;
+            color:white;
+            padding:20px;
+            font-size:22px;
+            font-weight:bold;
+        }
+
+        .container{
+            padding:30px;
+        }
+
+        .box{
+            background:white;
+            padding:25px;
+            border-radius:15px;
+            box-shadow:0 5px 15px rgba(0,0,0,0.1);
+            max-width:700px;
+            margin:auto;
+        }
+
+        h2{
+            margin-bottom:20px;
+            color:#1e3c72;
+        }
+
+        input{
+            width:100%;
+            padding:12px;
+            margin-bottom:15px;
+            border:1px solid #ccc;
+            border-radius:8px;
+        }
+
+        button{
+            padding:12px 20px;
+            background:#2a5298;
+            color:white;
+            border:none;
+            border-radius:8px;
+            cursor:pointer;
+        }
+
+        button:hover{
+            background:#1e3c72;
+        }
+
+        .back{
+            text-decoration:none;
+            color:#1e3c72;
+            font-weight:bold;
+            display:inline-block;
+            margin-bottom:20px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="navbar">
+    🎓 Tambah Mahasiswa
+</div>
+
+<div class="container">
+
+    <a href="/dashboard" class="back">
+        ← Kembali ke Dashboard
+    </a>
+
+    <div class="box">
+        <h2>Form Tambah Mahasiswa</h2>
+
+        {% with messages = get_flashed_messages() %}
+          {% if messages %}
+            <p style="color:green; margin-bottom:15px;">
+              {% for msg in messages %}
+                {{ msg }}
+              {% endfor %}
+            </p>
+          {% endif %}
+        {% endwith %}
+
+        <form action="/tambah_mahasiswa" method="POST">
+
+            <input type="text" name="nim" placeholder="Masukkan NIM">
+            <input type="text" name="nama" placeholder="Masukkan Nama">
+            <input type="text" name="jurusan" placeholder="Masukkan Jurusan">
+            <input type="text" name="ipk" placeholder="Masukkan IPK">
+
+            <button type="submit">
+                Simpan
+            </button>
+        </form>
+    </div>
+</div>
+
+</body>
+</html>

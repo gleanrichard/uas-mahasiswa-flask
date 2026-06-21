@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Cari Mahasiswa</title>
+
+    <style>
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family:Segoe UI;
+        }
+
+        body{
+            background:#f4f6f9;
+        }
+
+        .navbar{
+            background:#1e3c72;
+            color:white;
+            padding:20px;
+            font-size:22px;
+            font-weight:bold;
+        }
+
+        .container{
+            padding:30px;
+        }
+
+        .box{
+            background:white;
+            padding:25px;
+            border-radius:15px;
+            box-shadow:0 5px 15px rgba(0,0,0,0.1);
+            margin-bottom:25px;
+        }
+
+        h2{
+            margin-bottom:15px;
+            color:#1e3c72;
+        }
+
+        p{
+            margin-bottom:15px;
+            color:#666;
+        }
+
+        input{
+            width:100%;
+            padding:12px;
+            margin-bottom:15px;
+            border:1px solid #ccc;
+            border-radius:8px;
+        }
+
+        button{
+            padding:12px 20px;
+            background:#2a5298;
+            color:white;
+            border:none;
+            border-radius:8px;
+            cursor:pointer;
+        }
+
+        button:hover{
+            background:#1e3c72;
+        }
+
+        .back{
+            text-decoration:none;
+            color:#1e3c72;
+            font-weight:bold;
+            display:inline-block;
+            margin-bottom:20px;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="navbar">
+    🎓 Pencarian Mahasiswa
+</div>
+
+<div class="container">
+
+    <a href="/dashboard" class="back">
+        ← Kembali ke Dashboard
+    </a>
+
+    <div class="box">
+        <h2>Linear Search</h2>
+        <p>Pencarian berdasarkan Nama atau NIM (for loop)</p>
+
+        <form action="/linear_search" method="GET">
+            <input type="text" name="keyword" placeholder="Masukkan Nama / NIM">
+            <button type="submit">Cari Linear Search</button>
+        </form>
+            {% with messages = get_flashed_messages(with_categories=true) %}
+              {% if messages %}
+                {% for category, msg in messages %}
+                  {% if category == "linear" %}
+                      <p style="color:green; margin-top:10px;">{{ msg }}</p>
+                  {% endif %}
+                {% endfor %}
+              {% endif %}
+            {% endwith %}
+
+        {% if hasil and title == 'Hasil Linear Search' %}
+        <h2>{{ title }}</h2>
+
+        <table style="width:100%; border-collapse:collapse;">
+            <tr>
+                <th style="background:#1e3c72; color:white; padding:12px;">NIM</th>
+                <th style="background:#1e3c72; color:white; padding:12px;">Nama</th>
+                <th style="background:#1e3c72; color:white; padding:12px;">Jurusan</th>
+                <th style="background:#1e3c72; color:white; padding:12px;">IPK</th>
+            </tr>
+
+            {% for m in hasil %}
+            <tr>
+                <td style="padding:12px; border-bottom:1px solid #ddd;">{{ m.nim }}</td>
+                <td style="padding:12px; border-bottom:1px solid #ddd;">{{ m.nama }}</td>
+                <td style="padding:12px; border-bottom:1px solid #ddd;">{{ m.jurusan }}</td>
+                <td style="padding:12px; border-bottom:1px solid #ddd;">{{ m.ipk }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+        {% endif %}
+    </div>
+
+    <div class="box">
+        <h2>Sequential Search</h2>
+        <p>Pencarian berdasarkan Nama atau NIM (while loop)</p>
+
+        <form action="/sequential_search" method="GET">
+            <input type="text" name="keyword" placeholder="Masukkan Nama / NIM">
+            <button type="submit">Cari Sequential Search</button>
+        </form>
+
+            {% with messages = get_flashed_messages(with_categories=true) %}
+              {% if messages %}
+                {% for category, msg in messages %}
+                  {% if category == "sequential" %}
+                    <p style="color:green; margin-top:10px;">{{ msg }}</p>
+                  {% endif %}
+                {% endfor %}
+              {% endif %}
+            {% endwith %}
+
+        {% if hasil and title == 'Hasil Sequential Search' %}
+        <h2>{{ title }}</h2>
+
+        <table style="width:100%; border-collapse:collapse; margin-top:20px;">
+            <tr>
+                <th style="background:#1e3c72; color:white; padding:12px;">NIM</th>
+                <th style="background:#1e3c72; color:white; padding:12px;">Nama</th>
+                <th style="background:#1e3c72; color:white; padding:12px;">Jurusan</th>
+                <th style="background:#1e3c72; color:white; padding:12px;">IPK</th>
+            </tr>
+
+            {% for m in hasil %}
+            <tr>
+                <td style="padding:12px; border-bottom:1px solid #ddd;">{{ m.nim }}</td>
+                <td style="padding:12px; border-bottom:1px solid #ddd;">{{ m.nama }}</td>
+                <td style="padding:12px; border-bottom:1px solid #ddd;">{{ m.jurusan }}</td>
+                <td style="padding:12px; border-bottom:1px solid #ddd;">{{ m.ipk }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+        {% endif %}
+    </div>
+
+    <div class="box">
+        <h2>Binary Search</h2>
+        <p>Pencarian berdasarkan NIM saja (data diurutkan terlebih dahulu)</p>
+
+        <form action="/binary_search" method="GET">
+            <input type="text" name="keyword" placeholder="Masukkan NIM">
+            <button type="submit">Cari Binary Search</button>
+        </form>
+
+        {% with messages = get_flashed_messages() %}
+          {% if messages %}
+            {% for msg in messages %}
+              <p style="color:green; margin-top:10px;">{{ msg }}</p>
+            {% endfor %}
+          {% endif %}
+        {% endwith %}
+
+        {% if hasil and title == 'Hasil Binary Search' %}
+        <h2>{{ title }}</h2>
+
+        <table style="width:100%; border-collapse:collapse; margin-top:20px;">
+            <tr>
+                <th style="background:#1e3c72; color:white; padding:12px;">NIM</th>
+                <th style="background:#1e3c72; color:white; padding:12px;">Nama</th>
+                <th style="background:#1e3c72; color:white; padding:12px;">Jurusan</th>
+                <th style="background:#1e3c72; color:white; padding:12px;">IPK</th>
+            </tr>
+
+            {% for m in hasil %}
+            <tr>
+                <td style="padding:12px; border-bottom:1px solid #ddd;">{{ m.nim }}</td>
+                <td style="padding:12px; border-bottom:1px solid #ddd;">{{ m.nama }}</td>
+                <td style="padding:12px; border-bottom:1px solid #ddd;">{{ m.jurusan }}</td>
+                <td style="padding:12px; border-bottom:1px solid #ddd;">{{ m.ipk }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+        {% endif %}
+
+    </div>
+
+</div>
+
+</body>
+</html>

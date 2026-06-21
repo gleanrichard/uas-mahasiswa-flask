@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Sorting Mahasiswa</title>
+
+    <style>
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family:Segoe UI;
+        }
+
+        body{
+            background:#f4f6f9;
+        }
+
+        .navbar{
+            background:#1e3c72;
+            color:white;
+            padding:20px;
+            font-size:22px;
+            font-weight:bold;
+        }
+
+        .container{
+            padding:30px;
+        }
+
+        .box{
+            background:white;
+            padding:25px;
+            border-radius:15px;
+            box-shadow:0 5px 15px rgba(0,0,0,0.1);
+            margin-bottom:25px;
+        }
+
+        .back{
+            text-decoration:none;
+            color:#1e3c72;
+            font-weight:bold;
+            display:inline-block;
+            margin-bottom:20px;
+        }
+
+        button{
+            padding:12px 20px;
+            background:#2a5298;
+            color:white;
+            border:none;
+            border-radius:8px;
+            cursor:pointer;
+            margin-right:10px;
+        }
+
+        button:hover{
+            background:#1e3c72;
+        }
+
+        h2{
+            margin-bottom:20px;
+            color:#1e3c72;
+        }
+
+        table{
+            width:100%;
+            border-collapse:collapse;
+            background:white;
+            margin-top:20px;
+        }
+
+        th{
+            background:#1e3c72;
+            color:white;
+            padding:12px;
+        }
+
+        td{
+            padding:12px;
+            border-bottom:1px solid #ddd;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="navbar">
+    🎓 Sorting Data Mahasiswa
+</div>
+
+<div class="container">
+
+    <a href="/dashboard" class="back">
+        ← Kembali ke Dashboard
+    </a>
+
+    <div class="box">
+        <h2>Sorting Berdasarkan IPK</h2>
+
+        <a href="/sort_ipk">
+            <button>Bubble Sort</button>
+        </a>
+
+        <a href="/insertion_sort">
+            <button>Insertion Sort</button>
+        </a>
+
+        <a href="/selection_sort">
+            <button>Selection Sort</button>
+        </a>
+
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                {% for msg in messages %}
+                    <p style="color:red; margin-top:15px;">{{ msg }}</p>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+    </div>
+
+    <div class="box">
+        <h2>Data Sebelum Sorting</h2>
+
+        <table>
+            <tr>
+                <th>NIM</th>
+                <th>Nama</th>
+                <th>Jurusan</th>
+                <th>IPK</th>
+            </tr>
+
+            {% for m in before_data %}
+            <tr>
+                <td>{{ m.nim }}</td>
+                <td>{{ m.nama }}</td>
+                <td>{{ m.jurusan }}</td>
+                <td>{{ m.ipk }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+
+
+    {% if after_data %}
+    <div class="box">
+        <h2>{{ title }}</h2>
+
+        <table>
+            <tr>
+                <th>NIM</th>
+                <th>Nama</th>
+                <th>Jurusan</th>
+                <th>IPK</th>
+            </tr>
+
+            {% for m in after_data %}
+            <tr>
+                <td>{{ m.nim }}</td>
+                <td>{{ m.nama }}</td>
+                <td>{{ m.jurusan }}</td>
+                <td>{{ m.ipk }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+    {% endif %}
+
+</div>
+
+</body>
+</html>
